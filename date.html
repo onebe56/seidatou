@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Choisis une date</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      background: 
+        linear-gradient(135deg, rgba(255, 230, 240, 0.7), rgba(255, 192, 203, 0.7), rgba(255, 153, 204, 0.7)),
+        url('amour.webp');
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    .container {
+      text-align: center;
+      background: white;
+      padding: 40px;
+      border-radius: 20px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      max-width: 600px;
+    }
+    h1 {
+      margin-bottom: 20px;
+    }
+    .date-options {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 15px;
+      margin-bottom: 20px;
+    }
+    .date-options button {
+      padding: 10px 20px;
+      font-size: 16px;
+      border: none;
+      border-radius: 10px;
+      background-color: #ff99cc;
+      color: white;
+      cursor: pointer;
+    }
+    input[type="date"] {
+      padding: 10px;
+      font-size: 16px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      margin-bottom: 15px;
+    }
+    #continueBtn {
+      padding: 10px 20px;
+      font-size: 16px;
+      border: none;
+      border-radius: 10px;
+      background-color: #ff66a3;
+      color: white;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Choisis une date 📅</h1>
+
+    <div class="date-options">
+      <button onclick="selectDate('2025-07-16')">16 juillet</button>
+      <button onclick="selectDate('2025-07-17')">17juillet</button>
+      <button onclick="selectDate('2025-07-23')">23 juillet</button>
+      <button onclick="selectDate('2025-07-24')">24 juillet</button>
+    </div>
+  </div>
+
+  <script>
+    // Si elle clique sur un des 4 boutons
+    function selectDate(dateStr) {
+      localStorage.setItem("userDate", dateStr);
+      window.location.href = "recap.html";
+    }
+
+    // Si elle choisit une date manuellement
+    function saveDate() {
+      const date = document.getElementById("dateInput").value;
+      if (date) {
+        localStorage.setItem("userDate", date);
+        window.location.href = "recap.html";
+      } else {
+        alert("Choisis ou entre une date !");
+      }
+    }
+  </script>
+</body>
+</html>
+

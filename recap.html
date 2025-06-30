@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Résumé romantique</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      background: 
+        linear-gradient(135deg, rgba(255, 230, 240, 0.7), rgba(255, 192, 203, 0.7), rgba(255, 153, 204, 0.7)),
+        url('amour.webp');
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .container {
+      text-align: center;
+      background: white;
+      padding: 40px;
+      border-radius: 20px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+      max-width: 600px;
+    }
+
+    h1 {
+      color: #d63384;
+    }
+
+    p {
+      font-size: 20px;
+      margin-top: 20px;
+    }
+
+    button {
+      padding: 12px 24px;
+      font-size: 18px;
+      border: none;
+      border-radius: 10px;
+      background-color: #ff66a3;
+      color: white;
+      margin-top: 20px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #e05590;
+    }
+
+    #status {
+      margin-top: 15px;
+      font-weight: bold;
+      color: #007700;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>💌 Ton invitation ma petite</h1>
+    <p id="recapText">
+  Ma chère <span id="userName"></span>, prépare-toi pour une soirée magique au 
+  <span id="userPlace"></span> le 
+  <span id="userDate"></span> 💖 je t'aime malgré ta grosse tête, bisous 💖
+</p>
+   
+    <button onclick="sendEmail()">Merci</button>
+    <p id="status"></p>
+  </div>
+
+  <!-- SDK EmailJS moderne + Script -->
+  <!-- EmailJS SDK -->
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+
+<script>
+  // Initialiser EmailJS avec ta clé publique
+  emailjs.init("PGNxGDcVG5ZO_Tbql"); // 🔁 Remplace si besoin
+
+  // Préparer l'affichage du message
+  window.onload = function () {
+    const name = localStorage.getItem("userName") || "???";
+    const place = localStorage.getItem("userPlace") || "???";
+    const date = localStorage.getItem("userDate") || "???";
+
+    const message = `Ma chère ${name}, prépare-toi pour une soirée magique au ${place} le ${date} 💖 je t'aime malgré ta grosse tête, bisous 💖`;
+
+    document.getElementById("recapText").innerText = message;
+    localStorage.setItem("finalMessage", message);
+  };
+
+  // Fonction d'envoi appelée par le bouton
+  function sendEmail() {
+    const message = localStorage.getItem("finalMessage");
+
+    emailjs.send("service_0ym326r", "template_p9ypeya", {
+      to_name: "Moi",
+      message: message
+    })
+    .then(() => {
+      document.getElementById("status").innerText = "💌 Message envoyé avec succès !";
+      setTimeout(() => {
+        window.location.href = "https://www.youtube.com/watch?v=3k89NgB3ge8";
+      }, 2000);
+    })
+    .catch(error => {
+      document.getElementById("status").innerText = ": " + error.text;
+      console.error("Erreur EmailJS :", error);
+    });
+  }
+</script>
+
+</body>
+</html>

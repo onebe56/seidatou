@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Choisis un lieu</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Arial', sans-serif;
+      background: 
+        linear-gradient(135deg, rgba(255, 230, 240, 0.7), rgba(255, 192, 203, 0.7), rgba(255, 153, 204, 0.7)),
+        url('amour.webp');
+      margin: 0;
+      padding: 0;
+    }
+
+    .container {
+      max-width: 1300px;
+      margin: auto;
+      padding: 30px 20px;
+      text-align: center;
+    }
+
+    h1 {
+      margin-bottom: 30px;
+      color: #d63384;
+    }
+
+    .options {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr); /* 3 colonnes fixes */
+      gap: 20px;
+    }
+
+    .card {
+      position: relative;
+      height: 250px;
+      overflow: hidden;
+      border-radius: 20px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+      background-color: #fff;
+    }
+
+    .card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+
+    .card:hover img {
+      transform: scale(1.05);
+    }
+
+    .card button {
+      position: absolute;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      background-color: #ff66a3;
+      color: white;
+      border: none;
+      padding: 12px 20px;
+      border-radius: 10px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background-color 0.3s ease, transform 0.2s ease;
+    }
+
+    .card button:hover {
+      background-color: #e05590;
+      transform: translateX(-50%) scale(1.05);
+    }
+
+    .card p {
+      position: absolute;
+      top: 15px;
+      left: 20px;
+      color: white;
+      font-size: 18px;
+      font-weight: bold;
+      text-shadow: 1px 1px 3px rgba(0,0,0,0.7);
+      margin: 0;
+    }
+
+    /* Responsive ajustement si petit écran */
+    @media (max-width: 1000px) {
+      .options {
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Choisis notre lieu de rendez-vous 💕</h1>
+    <div class="options">
+
+      <div class="card">
+        <img src="kart1.webp" data-alt="assets/kart2.webp" alt="Karting">
+        <p>Karting Abidjan</p>
+        <button onclick="selectPlace('Karting Abidjan')">Choisir</button>
+      </div>
+
+      <div class="card">
+        <img src="jardin1.webp" data-alt="assets/jardin2.webp" alt="Jardin Botanique">
+        <p>Jardin Botanique de Bingerville</p>
+        <button onclick="selectPlace('Jardin Botanique de Bingerville')">Choisir</button>
+      </div>
+
+      <div class="card">
+        <img src="zoo1.webp" data-alt="assets/zoo2.webp" alt="Parc">
+        <p>Parc Zoologique d’Abidjan</p>
+        <button onclick="selectPlace('Parc Zoologique d’Abidjan')">Choisir</button>
+      </div>
+
+      <div class="card">
+        <img src="deba1.jpeg" data-alt="assets/deba2.jpeg" alt="Débarcadère">
+        <p>Le débarcadère de Treichville</p>
+        <button onclick="selectPlace('Le débarcadère de Treichville')">Choisir</button>
+      </div>
+
+      <div class="card">
+        <img src="cinema1.webp" data-alt="assets/cinema2.webp" alt="Cinéma">
+        <p>Cinéma Majestic</p>
+        <button onclick="selectPlace('Cinéma Majestic')">Choisir</button>
+      </div>
+
+      <div class="card">
+        <img src="assets/restaurant1.webp" data-alt="assets/restaurant2.webp" alt="la taverne romaine abidjan">
+        <p>La taverne romaine Abidjan</p>
+        <button onclick="selectPlace('La taverne romaine Abidjan')">Choisir</button>
+      </div>
+
+    </div>
+  </div>
+
+  <script>
+    function selectPlace(place) {
+      localStorage.setItem("userPlace", place);
+      window.location.href = "date.html";
+    }
+
+    // Carousel indépendant
+    document.querySelectorAll('.card img').forEach((img) => {
+      setInterval(() => {
+        const currentSrc = img.getAttribute("src");
+        const altSrc = img.getAttribute("data-alt");
+        img.setAttribute("src", altSrc);
+        img.setAttribute("data-alt", currentSrc);
+      }, 3000 + Math.random() * 2000);
+    });
+  </script>
+</body>
+</html>

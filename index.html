@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Bienvenue</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: 
+        linear-gradient(135deg, rgba(255, 230, 240, 0.7), rgba(255, 192, 203, 0.7), rgba(255, 153, 204, 0.7)),
+        url('amour.webp');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .container {
+      text-align: center;
+      background: rgba(255, 255, 255, 0.25);
+      padding: 40px;
+      border-radius: 25px;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      animation: fadeIn 1s ease-in-out;
+      width: 90%;
+      max-width: 400px;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    h1 {
+      font-size: 28px;
+      margin-bottom: 20px;
+      color: #d63384;
+    }
+
+    input {
+      padding: 12px;
+      width: 80%;
+      margin-top: 15px;
+      font-size: 18px;
+      border-radius: 12px;
+      border: 1px solid #ccc;
+      outline: none;
+    }
+
+    button {
+      padding: 12px 28px;
+      margin-top: 20px;
+      font-size: 18px;
+      border-radius: 12px;
+      border: none;
+      background-color: #ff66a3;
+      color: white;
+      cursor: pointer;
+      transition: background-color 0.3s ease, transform 0.2s ease;
+    }
+
+    button:hover {
+      background-color: #e05590;
+      transform: scale(1.03);
+    }
+
+    button:active {
+      background-color: #cc467e;
+      transform: scale(0.97);
+    }
+
+    #error {
+      color: red;
+      margin-top: 15px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>❤️ Bienvenue ma petite ❤️</h1>
+    <p>Entre ton prénom :</p>
+    <input type="text" id="nameInput" placeholder="Ton joli prénom...">
+    <br>
+    <button onclick="saveName()">Continuer</button>
+    <p id="error"></p>
+  </div>
+
+  <script>
+    function saveName() {
+      const name = document.getElementById("nameInput").value.trim().toLowerCase();
+      const allowed = ["seidatou"];
+      if (allowed.includes(name)) {
+        localStorage.setItem("userName", name);
+        window.location.href = "lieux.html";
+      } else {
+        document.getElementById("error").innerText = "Désolé, cette page ne vous est pas réservée";
+      }
+    }
+  </script>
+</body>
+</html>
